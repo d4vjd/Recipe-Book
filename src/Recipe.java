@@ -1,3 +1,5 @@
+import java.io.*;
+
 public class Recipe {
     public String name;
     public String ingredients;
@@ -109,6 +111,28 @@ public class Recipe {
         System.out.println("Cook Time: " + cookTime);
         System.out.println("Prep Time: " + prepTime);
         System.out.println("Category: " + category);
+    }
+
+    public void readRecipeFromTXT(File fileName) {
+        try {
+            FileReader fileReader = new FileReader(fileName);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            name = bufferedReader.readLine();
+            ingredients = bufferedReader.readLine();
+            instructions = bufferedReader.readLine();
+            servingSize = Integer.parseInt(bufferedReader.readLine());
+            prepTime = bufferedReader.readLine();
+            cookTime = bufferedReader.readLine();
+            category = bufferedReader.readLine();
+            rating = Float.parseFloat(bufferedReader.readLine());
+
+            bufferedReader.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("Unable to open file '" + fileName + "'");
+        } catch (IOException ex) {
+            System.out.println("Error reading file '" + fileName + "'");
+        }
     }
 
 
