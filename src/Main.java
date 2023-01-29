@@ -22,5 +22,8 @@ public class Main {
         File recipe3file = new File("src/recipe3file.txt");
         recipe3.readRecipeFromTXT(recipe3file); //read content of recipe3 from recipe3file.txt
         recipe3.displayRecipe();
+
+        String recipe3pdf="Recipe3pdf.pdf";
+        recipe3.exportRecipeAsPDF(recipe3pdf); //export recipe3 info to a pdf document
     }
 }

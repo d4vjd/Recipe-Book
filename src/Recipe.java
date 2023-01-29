@@ -1,4 +1,11 @@
 import java.io.*;
+import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.ColumnText;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfPageEventHelper;
+import com.itextpdf.text.pdf.PdfWriter;
 
 public class Recipe {
     public String name;
@@ -135,6 +142,63 @@ public class Recipe {
         }
     }
 
+    public void exportRecipeAsPDF(String fileName) {
+        Document document = new Document();
+        try {
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(fileName));
+            writer.setPageEvent(new MyHeaderFooter());
+            document.open();
+
+            Paragraph nameParagraph = new Paragraph("Name: " + name);
+            nameParagraph.setAlignment(Element.ALIGN_LEFT);
+            document.add(nameParagraph);
+
+            Paragraph ingredientsParagraph = new Paragraph("Ingredients: " + ingredients);
+            ingredientsParagraph.setAlignment(Element.ALIGN_LEFT);
+            document.add(ingredientsParagraph);
+
+            Paragraph instructionsParagraph = new Paragraph("Instructions: " + instructions);
+            instructionsParagraph.setAlignment(Element.ALIGN_LEFT);
+            document.add(instructionsParagraph);
+
+            Paragraph servingSizeParagraph = new Paragraph("Serving Size: " + servingSize);
+            servingSizeParagraph.setAlignment(Element.ALIGN_LEFT);
+            document.add(servingSizeParagraph);
+
+            Paragraph prepTimeParagraph = new Paragraph("Preparation Time: " + prepTime);
+            prepTimeParagraph.setAlignment(Element.ALIGN_LEFT);
+            document.add(prepTimeParagraph);
+
+            Paragraph cookTimeParagraph = new Paragraph("Cook Time: " + cookTime);
+            cookTimeParagraph.setAlignment(Element.ALIGN_LEFT);
+            document.add(cookTimeParagraph);
+
+            Paragraph categoryParagraph = new Paragraph("Category: " + category);
+            categoryParagraph.setAlignment(Element.ALIGN_LEFT);
+            document.add(categoryParagraph);
+
+            Paragraph ratingParagraph = new Paragraph("Rating: " + rating);
+            ratingParagraph.setAlignment(Element.ALIGN_LEFT);
+            document.add(ratingParagraph);
+
+            document.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    class MyHeaderFooter extends PdfPageEventHelper {
+        public void onEndPage(PdfWriter writer, Document document) {
+            PdfContentByte cb = writer.getDirectContent();
+            Phrase header = new Phrase("Recipe Book", new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
+            ColumnText.showTextAligned(cb, Element.ALIGN_CENTER, header, (document.right() - document.left()) / 2 + document.leftMargin(), document.top() + 10, 0);
+        }
+    }
+
 
 }
+
 
