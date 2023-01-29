@@ -1,24 +1,23 @@
-import java.io.*;
-import java.io.FileOutputStream;
-import java.io.FileNotFoundException;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.ColumnText;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import java.io.*;
+
 public class Recipe {
     public String name;
     public String ingredients;
     public String instructions;
-    public int servingSize;
+    public String servingSize;
     public String prepTime;
     public String cookTime;
     public String category;
     public float rating;
 
     // constructor method
-    public Recipe(String name, String ingredients, String instructions, int servingSize,
+    public Recipe(String name, String ingredients, String instructions, String servingSize,
                   String prepTime, String cookTime, String category, float rating) {
         this.name = name;
         this.ingredients = ingredients;
@@ -46,7 +45,7 @@ public class Recipe {
         return instructions;
     }
 
-    public int getServingSize() {
+    public String getServingSize() {
         return servingSize;
     }
 
@@ -79,7 +78,7 @@ public class Recipe {
         this.instructions = instructions;
     }
 
-    public void setServingSize(int servingSize) {
+    public void setServingSize(String servingSize) {
         this.servingSize = servingSize;
     }
 
@@ -128,7 +127,7 @@ public class Recipe {
             name = bufferedReader.readLine();
             ingredients = bufferedReader.readLine();
             instructions = bufferedReader.readLine();
-            servingSize = Integer.parseInt(bufferedReader.readLine());
+            servingSize = bufferedReader.readLine();
             prepTime = bufferedReader.readLine();
             cookTime = bufferedReader.readLine();
             category = bufferedReader.readLine();
@@ -197,6 +196,7 @@ public class Recipe {
             ColumnText.showTextAligned(cb, Element.ALIGN_CENTER, header, (document.right() - document.left()) / 2 + document.leftMargin(), document.top() + 10, 0);
         }
     }
+
 
 
 }
