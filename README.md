@@ -10,4 +10,4 @@
 
 - The project demonstrates the use of Java and JDBC to interact with a database and perform CRUD (Create, Read, Update, Delete) operations.
 
-> This project was used only for learning purposes and is not meant for commercial use.
+> This project was used only for learning purposes and it's not meant for commercial use.
