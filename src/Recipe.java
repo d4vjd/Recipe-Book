@@ -188,7 +188,6 @@ public class Recipe {
         }
     }
 
-
     class MyHeaderFooter extends PdfPageEventHelper {
         public void onEndPage(PdfWriter writer, Document document) {
             PdfContentByte cb = writer.getDirectContent();
@@ -196,8 +195,6 @@ public class Recipe {
             ColumnText.showTextAligned(cb, Element.ALIGN_CENTER, header, (document.right() - document.left()) / 2 + document.leftMargin(), document.top() + 10, 0);
         }
     }
-
-
 
 }
 
